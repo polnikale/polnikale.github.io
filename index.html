@@ -1,285 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>New Providence</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .linesWrapper {
+      position: absolute;
+      opacity: 0;
+    }
+    .linesWrapper-active {
+      opacity: 1;
+    }
+    .linesWrapper__info {
+      padding: 6px;
+      position: relative;
+      transition: background .1s;
+      background: #FFF;
+      border-radius: 6px;
+      z-index: 6;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    .linesWrapper__text {
+      font-size: 12px;
+    }
+    .linesWrapper__value {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .linesWrapper__date {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .linesWrapper__valueWrapper {
+      display: inline-block;
+      margin-right: 6px;
+    }
+    .linesWrapper__line {
+      margin-left: 7px;
+      width: 1px;
+      height: 415px;
+      position: absolute;
+      top: 0;
+      z-index: 5;
+      background: #EAEAEA;
+    }
+    .linesWrapper__dot {
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      z-index: 6;
+      transition: background .1s;
+      border: 2px solid;
+      border-radius: 50%;
+    }
 
-    <link rel='stylesheet' href='css/bootstrap.min.css'>
-    <!-- BOOTSTRAP -->
+    .dates__element {
+      transition: left 0.1s;
+    }
 
-    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    .checkbox__wrapper {
+      padding: 8px;
+      margin: 8px;
+      border-radius: 10px;
+      display: inline-block;
+      border: 1px solid #EAEAEA;
+    }
+    .checkbox__wrapper input[type="checkbox"]+label {
+      cursor: pointer;
+      position: relative;
+      margin-left: 22px;
+      display: inline-block;
+      padding-left: 10px;
+    }
 
-    <link rel="stylesheet" href="css/styles.css">
+    .checkbox__wrapper input[type="checkbox"] {
+      position: absolute;
+      left: -9999px;
+    }
+
+    /* the checkbox
+    -----------------------------------------------*/
+    .checkbox__wrapper input[type="checkbox"]+label::after {
+      content: '';
+      border: 2px solid rgba(0, 0, 0, .5);
+      border-radius: 50%;
+      background-color: white;
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translate(-20px, -50%);
+      box-sizing: border-box;
+      width: 20px;
+      height: 20px;
+      transition: background-color 1s;
+      background-position: -2px -1px;
+    }
+
+    /* the checkbox -- checked
+    -----------------------------------------------*/
+    .checkbox__wrapper input[type="checkbox"]:checked+label::after {
+      border: 2px solid rgba(23, 149, 136, 1);
+      background-color: rgba(23, 149, 136, .7);
+    }
+
+    /* the checkbox -- disabled
+    -----------------------------------------------*/
+    .checkbox__wrapper input[type="checkbox"]:disabled+label::after {
+      border: 2px solid rgba(0, 0, 0, .1);
+      background-color: rgba(0, 0, 0, .05);
+      background-image: none;
+    }
+
+
+    .checkbox__wrapper input[type="checkbox"]:focus+label::before {
+      animation: ripple 1s ease-out;
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(0, 0);
+        opacity: 1;
+      }
+      20% {
+        transform: scale(25, 25);
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: scale(40, 40);
+      }
+    }
+
+    body {
+      transition: opacity .1s;
+    }
+
+
+  </style>
 </head>
-
 <body>
-    <div class="navbar">
-        <div class="container">
-            <div class="row d-flex align-items-baseline fixed">
-                <div class="navbar-menu col-lg-4">
-                    <i class="fa fa-bars left" aria-hidden="true"></i>
-                    <a href="#">Tour</a>
-                    <a href="#">Features</a>
-                    <a href="#">Pricing</a>
-                </div>
-                <div class="logo col-lg-4">
-                    <p> <img src="images/logo.png" alt="logo"> </p>
-                </div>
-                <div class="help col-lg-4">
-                    <ul>
-                        <li><a href="#" class='disabled'>Help</a></li>
-                        <li><a href="#">Contacts</a></li>
-                        <li><a class="btn btn-primary" role="button"><i class="fa fa-apple" aria-hidden="true"></i>Get App</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--NAVBAR-->
-
-    <section class="text">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <h2>What happens tomorrow?</h2>
-                    <p>The sight of the tumblers restored Bob Sawyer to a degree of equanimity which he had not possessed since his interview with his landlady. His face brightened up, and he began to feel quite convivial.</p>
-                    <p class='btn'> <a href="#" class="button"><i class="fa fa-play" aria-hidden="true"></i>Watch Video</a> </p>
-                </div>
-
-                <img class='text-phone' src='images/header_iphone.png' alt='phone'>
-            </div>
-        </div>
-    </section>
-
-    <section class="features">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 feature1">
-                    <figure><img src="images/lock.png" alt="lock">
-                        <figcaption>
-                            <h4>Real-time all the time</h4>
-                            <p>Thus much I thought proper to tell you in relation to yourself, and to the trust I reposed in you.</p>
-                            <p>Just then her head struck against the roof of the hall: in fact she was now more than nine feet high, and she at once took up the little golden key and hurried off to the garden door.</p>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-lg-6 feature2">
-                    <figure><img src="images/clock.png" alt="">
-                        <figcaption>
-                            <h4>Adopt without any obstacles</h4>
-                            <p>This sounded a very good reason, and Alice was quite pleased to know it. 'I never thought of that before!' she said.</p>
-                            <p>This I have produced as a scantling of Jack’s great eloquence and the force of his reasoning upon such abstruse matters.</p>
-                        </figcaption>
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="iPhone-Feature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 offset-lg-7 col-md-12">
-                    <h3>Your day</h3>
-                    <h3 class='mb'>is protected</h3>
-                    <p>There have not been any since we have lived here, said my mother. </p>
-                    <p class='mb'>We thought - Mr. Copperfield thought - it was quite a large rookery; but the nests were very old ones, and the birds have deserted them a long while.</p>
-
-                    <p><a href="#" class='blue'>Try to hack us<i class="fa fa-arrow-right" aria-hidden="true"></i></a> <a href="#" class='outline'>Learn more</a> </p>
-
-                </div>
-                <div class="iPhone-Showcase">
-                    <img src="images/iPhone.png" alt="iPhone" class="iPhone">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="Map-Feature">
-        <div class='container'>
-            <div class='row'>
-                <div class="col-lg-5 col-md-12">
-                    <h3>We are almost</h3>
-                    <h3 class='mb'>everywhere</h3>
-                    <p>Now the races of these two have been for some ages utterly extinct, and besides to discourse any further of them would not be at all to my purpose.</p>
-                    <p class='mb'>Thus much I thought proper to tell you in relation to yourself, and to the trust I reposed in you.</p>
-                    <h6>Partners</h6>
-                    <div class="partners">
-                        <p><img src="images/dropbox.png" alt="dropbox"><img src="images/evernote.png" alt="evernote"></p>
-                    </div>
-                </div>
-
-                <div class="map-showcase">
-                    <img src="images/World-Map.png" alt="map">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="iphone-screens">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>Beautiful Interface</h3>
-                    <h6>Landing Screen</h6>
-                </div>
-            </div>
-        </div>
-        <ul class='iphones'>
-            <li><img src="images/interface/img-1.png" alt="interface"></li>
-            <li><img src="images/interface/img-2.png" alt="interface"></li>
-            <li class='mainimg'><img src="images/interface/main-img.png" alt="interface"></li>
-            <li><img src="images/interface/img-3.png" alt="interface"></li>
-            <li><img src="images/interface/img-4.png" alt="interface"></li>
-        </ul>
-    </section>
-
-    <section class="ready-to-buy">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h6><span class='bold'>new</span>providence</h6>
-                    <h3>Get it to your smartphone</h3>
-                    <div class="group-input">
-                        <input type="email" placeholder="Email here">
-                        <a href="#">Send Invite <i class="fa fa-arrow-right"></i></a>
-                    </div>
-                    <h6>or download from</h6>
-                    <div class="btn-black">
-                        <i class="fa fa-apple"></i>
-                        <span>
-                            Download on the <br>
-                            <b>App Store</b>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="plan">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-12">
-                    <h3 class='mb'>Choose your perfect plan</h3>
-                    <h6>You are</h6>
-                    <div class="toggle-container cf">
-                        <div class="switch-toggles">
-                            <div class="individual active">Individual</div>
-                            <!-- active -->
-                            <div class="company">Company</div>
-                        </div>
-                    </div>
-                    <p>Thus much I thought proper to tell you in relation to yourself, and to the trust I reposed in you.</p>
-                    <h5>Have a bigger team? <span class='link'>Let‘s talk</span> </h5>
-                </div>
-
-                <div class="col-lg-7 offset-lg-1 col-md-12 plans">
-                    <div class="starter">
-                        <h3>Starter</h3>
-                        <a href="#" class="btn btn-outline-secondary" role="button">Free</a>
-                        <h5>Build you schedule<br>every day</h5>
-                        <ul>
-                            <li><i class="fa fa-check" aria-hidden="true"></i>Unlimited events</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i>Connect Dropbox & Evernote</li>
-                        </ul>
-                        <a href="" class="btn btn-primary" role="button">Get started</a>
-                    </div>
-
-                    <div class="pro">
-                        <h3>Pro</h3>
-                        <a href="#" class="btn btn-outline-secondary">$4.99</a>
-                        <h5>Make your life<br>better</h5>
-                        <ul>
-                            <li><i class="fa fa-check" aria-hidden="true"></i>Unlimited events</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i>Connect Dropbox & Evernote</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i>Personal assistant</li>
-                        </ul>
-                        <a href="" class="btn btn-outline-primary" role="button">Make me a Pro</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="subscribe">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>Subscribe our newsletters</h3>
-                    <div class="group-input">
-                        <input type="email" placeholder="Your e-mail">
-                        <a href="#">Subscribe</a>
-                    </div>
-                    <h5>We promise to never spam you</h5>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container adv-container">
-            <div class="row">
-                <div class="col-lg-3 col-md-12 download">
-                    <img src="images/logo.png" alt="logo" class='logo'>
-                    <p>It was some time before he obtained any answer, and the reply, when made, was unpropitious.</p>
-                    <a href="#" class='appstore'><img src="images/Download.png" alt="download"></a>
-                    <ul class="socials">
-                        <li><i class="fa fa-twitter" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-facebook" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-google-plus" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-twitter" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-pinterest-p" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-linkedin" aria-hidden="true"></i></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 offset-lg-2 col-md-4 col-sm-6">
-                    <ul class='info'>
-                        <li class='title'>Learn more</li>
-                        <li>How it works?</li>
-                        <li>Meeting tools</li>
-                        <li>Live striming</li>
-                        <li>Contat method</li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <ul class='info'>
-                        <li class='title'>About</li>
-                        <li>About us</li>
-                        <li>Features</li>
-                        <li>Privacy police</li>
-                        <li>Terms & Conditions</li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <ul class='info'>
-                        <li class='title'>Support</li>
-                        <li>F.A.Q</li>
-                        <li>Contact us</li>
-                        <li>Live chat</li>
-                        <li>Phone call</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="container copyright-container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="info-text">For more info visit: <a href="http://getcraftwork.com">http://getcraftwork.com</a></div>
-                </div>
-                <div class="col-md-6">
-                    <div class="love">
-                        Made with love by <img src="images/Logo-footer.png" alt="logo">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+  <div class="chart0"></div>
+  <div class="chart1"></div>
+  <div class="chart2"></div>
+  <div class="chart3"></div>
+  <div class="chart4"></div>
+  <script src="./main.js"></script>
 </body>
-
 </html>
